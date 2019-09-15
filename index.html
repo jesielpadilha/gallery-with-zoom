@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Galery-Zoom</title>
+    <link rel="stylesheet" href="assets/css/photoswipe.css">
+    <link rel="stylesheet" href="assets/css/default-skin/default-skin.css">
+    <style>
+        .image-galary {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="img/img1.jpg" alt="" width="200" class="image-galary" onclick="showImage(0)">
+    <img src="img/img2.jpg" alt="" width="200" class="image-galary" onclick="showImage(1)">
+    <img src="img/img3.jpg" alt="" width="200" class="image-galary" onclick="showImage(2)">
+    <img src="img/img4.jpg" alt="" width="200" class="image-galary" onclick="showImage(3)">
+    <img src="img/img5.jpg" alt="" width="200" class="image-galary" onclick="showImage(4)">
+    <img src="img/img6.jpg" alt="" width="200" class="image-galary" onclick="showImage(5)">
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"> </div>
+                <div class="pswp__item"> </div>
+                <div class="pswp__item"> </div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"
+                        style="margin-right: 15px"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="assets/js/photoswipe.min.js"></script>
+<script src="assets/js/photoswipe-ui-default.min.js"></script>
+<script>
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    var items = [];
+    var options = {
+        index: 0
+    };
+
+    window.onload = function () {
+        prepareImageList()
+    };
+
+    // gallery.init();
+    function showImage(index) {
+        options.index = index;
+        gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery.init();
+    }
+
+    function prepareImageList() {
+        const imagesPage = document.querySelectorAll('img[class=image-galary]');
+
+        imagesPage.forEach(imagePage => {
+            let img = new Image();
+            img.src = imagePage.src;
+            items.push({
+                src: imagePage.src,
+                w: img.width,
+                h: img.height
+            });
+        });
+    }
+</script>
+
+</html>
